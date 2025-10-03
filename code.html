@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="zh">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>齐喜的网站 - 兑换码验证</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+  <link rel="stylesheet" href="./style.css">
+  <style>
+	/* 兑换码样式 */
+	input {
+	  width: 100%;
+	  padding: 10px;
+	  margin: 10px 0;
+	  border: 1px solid #ccc;
+	  border-radius: 4px;
+	}
+
+	button {
+	  padding: 10px 15px;
+	  background-color: #007bff;
+	  color: white;
+	  border: none;
+	  border-radius: 4px;
+	  cursor: pointer;
+	}
+
+	button:hover {
+	  background-color: #0056b3;
+	}
+
+	#result {
+	  margin-top: 15px;
+	  font-weight: bold;
+	}
+
+	#jumpButton {
+	  display: inline-block;
+	  margin-top: 10px;
+	  padding: 10px 15px;
+	  background-color: #28a745;
+	  color: white;
+	  text-decoration: none;
+	  border-radius: 4px;
+	}
+
+	#jumpButton:hover {
+	  background-color: #1e7e34;
+	}
+  </style>
+ </head>
+ <body>
+  <!-- 页面头部 -->
+  <header style="position: relative;">
+   <h1>齐喜的网站</h1>
+   <h6>终于进来了，随便看看</h6>
+   <!-- 汉堡菜单按钮 + 下拉 -->
+<div class="nav-menu-toggle">
+  <div class="hamburger" onclick="this.classList.toggle('active')">
+	<span></span>
+	<span></span>
+	<span></span>
+  </div>
+  <ul class="nav-dropdown">
+	<li><a href="index.html"><strong>首页</strong></a></li>
+	<li><a href="product.html"><strong>产品中心</strong></a></li>
+	<li><a href="hengdian.html"><strong>恒电虚拟公司</strong></a></li>
+	<li><a href="code.html">兑换码</a></li>
+	<li><a href="about.html"><strong>关于我</strong></a></li>
+  </ul>
+</div>
+  </header>
+  <!-- 主体内容 -->
+  <main class="container">
+   <h2>💥 齐喜的兑换码验证</h2>
+   <input type="text" id="codeInput" placeholder="请输入兑换码">
+   <button onclick="verifyCode()">验证兑换码</button>
+   <div id="result"></div>
+   <div id="jumpContainer" style="display: none;">
+	<a id="jumpButton" href="#" target="_blank">点击跳转</a>
+   </div>
+   <p>
+	<br>
+   </p>
+   <p>
+	<br>
+   </p>
+   <p>
+	<br>
+   </p>
+   <p>
+	<br>
+   </p>
+   <p>
+	<br>
+   </p>
+   <p>
+	<br>
+   </p>
+   <p>
+	<br>
+   </p>
+   <p>
+	<br>
+   </p>
+   <p>
+	<br>
+   </p>
+   <p>
+	<br>
+   </p>
+   <p>
+	<br>
+   </p>
+   <p>
+	<br>
+   </p>
+  </main>
+  <!-- 页脚 -->
+  <footer class="container">
+   <p><a href="https://space.bilibili.com/345281727">@齐喜的频道</a> 2024-2025 保留所有权利。</p>
+   <p><small>*.nobook.com 为 北京乐步教育科技有限公司 的网址。</small></p>
+   <p><small>123网盘提供下载支持</small></p>
+   <p><small>版本 v.0.2.10 </small></p>
+  </footer>
+  <!-- JS 脚本 -->
+  <script src="script.js"></script>
+ </body>
+</html>
