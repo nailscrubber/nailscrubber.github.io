@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>齐喜的网站 - 轰炸Utw</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+  <link rel="stylesheet" href="./style.css">
+  <style>
+	/* 兑换码样式 */
+	input {
+	  width: 100%;
+	  padding: 10px;
+	  margin: 10px 0;
+	  border: 1px solid #ccc;
+	  border-radius: 4px;
+	}
+
+	button {
+	  padding: 10px 15px;
+	  background-color: #007bff;
+	  color: white;
+	  border: none;
+	  border-radius: 4px;
+	  cursor: pointer;
+	}
+
+	button:hover {
+	  background-color: #0056b3;
+	}
+
+	#result {
+	  margin-top: 15px;
+	  font-weight: bold;
+	}
+
+	#jumpButton {
+	  display: inline-block;
+	  margin-top: 10px;
+	  padding: 10px 15px;
+	  background-color: #28a745;
+	  color: white;
+	  text-decoration: none;
+	  border-radius: 4px;
+	}
+
+	#jumpButton:hover {
+	  background-color: #1e7e34;
+	}
+  </style>
+</head>
+<body>
+
+  <header>
+	<h1>齐喜的网站</h1>
+	<h6>终于进来了，随便看看</h6>
+  </header>
+
+  <!-- 主体内容 -->
+  <main class="container">
+<body>
+  <!-- 图片展示区域 -->
+  <div style="text-align: center; margin-top: 50px;">
+	<image id="myImage" src="./pic/image1.jpg" alt="默认图片" width="200">
+  </div>
+
+  <!-- 按钮区域 -->
+  <div style="text-align: center; margin-top: 20px;">
+	<button onclick="changeImage()">轰炸他！</button>
+	<button onclick="resetImage()">再来一次（恢复）</button>
+  </div>
+
+<h3><br></h3> 
+<h2>这是谁？</h2>
+<p>这是Utw，和齐喜有仇。</p>
+<h3><br></h3> 
+<h2>为什么要轰炸他？</h2>
+<p>Utw乱发动战争，嘲讽他人，不友善，把3L弄惨了。全世界基本都在反Utw。这小子不悔改还天天骂我。</p>
+<h3><br></h3>
+<h2>原谅他吧？</h2>
+<p>虽然Utw最近没那么邪恶了，但是我们不能原谅他，他不友善的态度至今没改。例如，他骂我的小剧场是rubbish短剧。</h2>
+<p><br></p>
+<p>看图:</p>
+<img src="./pic/证据1.jpg" alt="证据1" width="200">
+<img src="./pic/证据2.jpg" alt="证据2" width="200">
+<p><br></p>
+<p>还没完，</p>
+<img src="./pic/证据3.jpg" alt="证据3" width="200">
+<p>早期羡慕我涨粉快，于是硬说我花钱买的粉丝，我没涨粉就磨叽。</p>
+<p><br></p>
+<p>还有，</p>
+<img src="./pic/证据4.jpg" alt="证据4" width="200">
+<p><br></p>
+<p>以及，这是当年Utw脑抽想和齐喜和好的珍贵笑话:</p>
+<img src="./pic/笑话.jpg" alt="哈哈哈" width="200">
+<p>Utw说的猫是指</p>
+<img src="./pic/Utw猫2.jpg" alt="猫猫1" width="200">
+<p>和</p>
+<img src="./pic/Utw猫1.jpg" alt="猫猫2" width="200">
+<p>从别的画师偷来的图让他说成他送给我的了🤔</p>
+<p><br></p>
+<p>和好了吗？没有。</p>
+<p>齐喜一向很宽容，Utw自找的。</p>
+<p><br></p>
+<h2>所以现在怎么办？</h2>
+<p>我们已经把Utw的话当作空气处理。</p>
+<p><br></p>
+</main>
+<footer>
+   <p><a href="https://space.bilibili.com/345281727">@齐喜的频道</a> 2024-2025 保留所有权利。</p>
+   <p><small>*.nobook.com 为 北京乐步教育科技有限公司 的网址。</small></p>
+   <p><small>123网盘提供下载支持</small></p>
+   <p><small> 版本 v.0.2.08 </small></p>
+</footer>
+  <script>
+	// 默认图片路径
+	const defaultImage = "../pic/image1.jpg";
+	// 切换后的图片路径
+	const newImage = "./pic/image2.jpg";
+
+	function changeImage() {
+	  document.getElementById("myImage").src = newImage;
+	}
+
+	function resetImage() {
+	  document.getElementById("myImage").src = defaultImage;
+	}
+  </script>
+</body>
+</main>
+</html>
