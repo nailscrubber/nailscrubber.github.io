@@ -126,5 +126,29 @@
   </footer>
   <!-- JS 脚本 -->
   <script src="script.js"></script>
+  <script>
+// 配置参数
+const monitorKey = 'hello';
+const targetValue = '1';
+const redirectUrl = 'https://www.baidu.com';
+const checkInterval = 114; // 毫秒
+
+// 记录上次的值，用于判断是否发生变化
+let lastValue = localStorage.getItem(monitorKey);
+
+// 开始监测
+setInterval(() => {
+	const currentValue = localStorage.getItem(monitorKey);
+	
+	// 如果值变了，并且等于 "1"，就立即跳转
+	if (currentValue !== lastValue && currentValue === targetValue) {
+		console.log('检测到 hello="1"，跳转到百度！');
+		window.location.href = redirectUrl;
+	}
+	
+	// 更新上次的值
+	lastValue = currentValue;
+}, checkInterval);
+  </script>
  </body>
 </html>

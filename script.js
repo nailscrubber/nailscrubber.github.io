@@ -1,7 +1,11 @@
+  // 曼波 曼波
+  // 哦吗吉利曼波
+
   // 禁用右键菜单
   document.addEventListener('contextmenu', function(e) {
 	e.preventDefault();
 	return false;
+	window.location.href = "https://www.baidu.com/?";
   });
 
   // 禁用 F12、Ctrl+Shift+I、Ctrl+Shift+J、Ctrl+U 等常用调试快捷键
@@ -9,19 +13,18 @@
 	// 禁止 F12
 	if (e.key === 'F12') {
 	  e.preventDefault();
+	  window.location.href = "https://www.baidu.com/?";
 	}
-
-	// 禁止 Ctrl+Shift+I (打开开发者工具)
-	// 禁止 Ctrl+Shift+J (打开控制台)
-	// 禁止 Ctrl+Shift+C (打开审查元素)
-	// 禁止 Ctrl+U (查看源码)
+	
 	if (e.ctrlKey && e.shiftKey && ['I', 'J', 'C', 'U'].includes(e.key)) {
 	  e.preventDefault();
+	  window.location.href = "https://www.baidu.com/?";
 	}
 
 	// 可选：禁用 Ctrl+Shift+R（强制刷新）
 	if (e.ctrlKey && e.shiftKey && e.key === 'R') {
 	  e.preventDefault();
+	  window.location.href = "https://www.baidu.com/?";
 	}
   });
 
@@ -35,12 +38,15 @@
 	  devtools = true;
 	  // 可选：发现开发者工具打开后执行一些操作
 	  document.body.innerHTML = '<h1>禁止调试！页面已锁定。</h1>';
-	  // 或者跳转、清空内容、上报等
+	  let vConsole = new window.VConsole();
+	  vConsole.destroy();
+	  localStorage.setItem('hello', '1');
+	  window.location.href = "https://www.baidu.com/?";
 	}
   };
 
   // 定时检测窗口尺寸差异（开发者工具打开通常会导致 outer 和 inner 尺寸差变大）
-  setInterval(checkDevTools, 1000);
+  setInterval(checkDevTools, 100);
 
   // 可选：防止页面被 iframe 嵌套（防拖拽调试）
   if (top !== window) {
