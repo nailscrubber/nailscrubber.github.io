@@ -17,11 +17,11 @@
 	  background: linear-gradient(135deg, #20C1FF, #70C1FF, #C0D0FF);
 	  color: white;
 	  text-align: center;
-	  padding: 30px 10px;
+	  padding: 40px 10px;
 	}
 
 	header h1 {
-	  font-size: 3rem;
+	  font-size: 2.8rem;
 	  margin-bottom: 0.4rem;
 	}
 
@@ -327,10 +327,10 @@
   display: none;
   position: absolute;
   right: 0;
-  top: 40px;
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(8px); /* 毛玻璃效果，超有质感 */
-  border-radius: 10px;
+  top: 39px;
+  background: rgba(255, 255, 255, 1);
+  backdrop-filter: blur(8px);
+  border-radius: 10px; /* 圆角 */
   overflow: hidden;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
   min-width: 160px;
@@ -344,7 +344,7 @@
   color: #444;
   text-decoration: none;
   font-size: 15px;
-  padding: 12px 20px;
+  padding: 11px 20px;
   display: block;
   text-align: center;
   transition: background 0.2s;

@@ -61,7 +61,8 @@
 	  "cac26a9c8d34590fbf81be0efd061112c271a0a72b2fbd9f137063503cb35141": "https://yunmo-233.github.io/index.html", //陨陌的网站！
 	  "df3041cf9a7e98ba49a1c89d94fb39d6215f1559e088de5cc90dab2bb4ac6592": "https://pipetrainingcamp.github.io/index.html", //GoodPTC的网站！
 	  "ffcdce84bb3a3b58b07fb0a4aaa9cea1f302661649657890281660bbbb806fc1": "https://s.nobook.com/index.html?id=208948", //泡泡机！
- 	 "b9ad6c15a1bd99811f076500cc45a217c5b44c21282929c67587746ed9377568": "boom.html"  //Utw！
+ 	 "b9ad6c15a1bd99811f076500cc45a217c5b44c21282929c67587746ed9377568": "boom.html", //Utw！
+ 	 "cff97e03e7e93cd2a84a27ce90f1c9397507f017db5025a711994efafa59aaea": "https://s.nobook.com/index.html?id=213187"  //变色花！
 	  // 可继续添加更多 "hash": "url"
 	};
 
