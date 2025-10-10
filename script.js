@@ -5,7 +5,7 @@
   document.addEventListener('contextmenu', function(e) {
 	e.preventDefault();
 	return false;
-	window.location.href = "https://www.baidu.com/?";
+	alert("曼波")
   });
 
   // 禁用 F12、Ctrl+Shift+I、Ctrl+Shift+J、Ctrl+U 等常用调试快捷键
@@ -46,7 +46,21 @@
   };
 
   // 定时检测窗口尺寸差异（开发者工具打开通常会导致 outer 和 inner 尺寸差变大）
-  setInterval(checkDevTools, 100);
+let devToolsDetected = false;
+
+function checkDevTools() {
+	const isDevToolsOpen = (window.outerHeight - window.innerHeight > 100) || 
+						   (window.outerWidth - window.innerWidth > 100);
+
+	if (isDevToolsOpen && !devToolsDetected) {
+		alert('检测到开发者工具已打开！');
+		devToolsDetected = true; // 只提示一次
+	} else if (!isDevToolsOpen) {
+		devToolsDetected = false; // 如果关闭了，可以再次检测
+	}
+}
+
+setInterval(checkDevTools, 100);
 
   // 可选：防止页面被 iframe 嵌套（防拖拽调试）
   if (top !== window) {
