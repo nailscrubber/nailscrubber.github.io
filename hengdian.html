@@ -142,8 +142,8 @@
             const windowHeight = window.innerHeight;
             const bodyHeight = document.body.offsetHeight;
     
-            // 当滚动到接近底部时（例如距离底部200px）
-            if (scrollPosition + windowHeight >= bodyHeight - 200) {
+            // 当滚动到接近底部时
+            if (scrollPosition + windowHeight >= bodyHeight - 0) {
                 popupImage.classList.add('show');
             } else {
                 popupImage.classList.remove('show');
