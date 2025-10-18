@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>齐喜的网站 - 兑换码验证</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
-  <link rel="stylesheet" href="./style.css">
+  <link rel="stylesheet" href="style.css">
   <style>
 	/* 兑换码样式 */
 	input {
@@ -48,6 +48,7 @@
 	#jumpButton:hover {
 	  background-color: #1e7e34;
 	}
+
   </style>
  </head>
  <body>
@@ -68,6 +69,7 @@
 	<li><a href="hengdian.html"><strong>恒电虚拟公司</strong></a></li>
 	<li><a href="code.html">兑换码</a></li>
 	<li><a href="about.html"><strong>关于我</strong></a></li>
+	<li><a href="https://www.123865.com/s/uxYEvd-eWWsH"><strong>下载软件</strong></a></li>
   </ul>
 </div>
   </header>
@@ -125,30 +127,78 @@
    <p><small>版本 v.0.2.10 </small></p>
   </footer>
   <!-- JS 脚本 -->
-  <script src="script.js"></script>
-  <script>
-// 配置参数
-const monitorKey = 'hello';
-const targetValue = '1';
-const redirectUrl = 'https://www.baidu.com';
-const checkInterval = 114; // 毫秒
+  <script src="script.js">
+// 曼波 曼波
+// 哦吗吉利曼波
 
-// 记录上次的值，用于判断是否发生变化
-let lastValue = localStorage.getItem(monitorKey);
+// 禁用右键菜单
+document.addEventListener("contextmenu", function (e) {
+  e.preventDefault();
+  return false;
+  alert("曼波");
+});
 
-// 开始监测
-setInterval(() => {
-	const currentValue = localStorage.getItem(monitorKey);
-	
-	// 如果值变了，并且等于 "1"，就立即跳转
-	if (currentValue !== lastValue && currentValue === targetValue) {
-		console.log('检测到 hello="1"，跳转到百度！');
-		window.location.href = redirectUrl;
-	}
-	
-	// 更新上次的值
-	lastValue = currentValue;
-}, checkInterval);
+// 禁用 F12、Ctrl+Shift+I、Ctrl+Shift+J、Ctrl+U 等常用调试快捷键
+document.addEventListener("keydown", function (e) {
+  // 禁止 F12
+  if (e.key === "F12") {
+	e.preventDefault();
+	window.location.href = "https://www.baidu.com/?";
+  }
+
+  if (e.ctrlKey && e.shiftKey && ["I", "J", "C", "U"].includes(e.key)) {
+	e.preventDefault();
+	window.location.href = "https://www.baidu.com/?";
+  }
+
+  // 可选：禁用 Ctrl+Shift+R（强制刷新）
+  if (e.ctrlKey && e.shiftKey && e.key === "R") {
+	e.preventDefault();
+	window.location.href = "https://www.baidu.com/?";
+  }
+});
+
+// 防止通过菜单或设置打开开发者工具（检测控制台是否打开）
+let devtools = false;
+const threshold = 160; // 宽度阈值，用于检测开发者工具是否打开
+
+const checkDevTools = () => {
+  if (
+	window.outerHeight - window.innerHeight > threshold ||
+	window.outerWidth - window.innerWidth > threshold
+  ) {
+	devtools = true;
+	// 可选：发现开发者工具打开后执行一些操作
+	document.body.innerHTML = "<h1>禁止调试！页面已锁定。</h1>";
+	let vConsole = new window.VConsole();
+	vConsole.destroy();
+	localStorage.setItem("hello", "1");
+	window.location.href = "https://www.baidu.com/?";
+  }
+};
+
+// 定时检测窗口尺寸差异（开发者工具打开通常会导致 outer 和 inner 尺寸差变大）
+let devToolsDetected = false;
+
+function checkDevTools() {
+  const isDevToolsOpen =
+	window.outerHeight - window.innerHeight > 100 ||
+	window.outerWidth - window.innerWidth > 100;
+
+  if (isDevToolsOpen && !devToolsDetected) {
+	alert("检测到开发者工具已打开！");
+	devToolsDetected = true; // 只提示一次
+  } else if (!isDevToolsOpen) {
+	devToolsDetected = false; // 如果关闭了，可以再次检测
+  }
+}
+
+setInterval(checkDevTools, 100);
+
+// 可选：防止页面被 iframe 嵌套（防拖拽调试）
+if (top !== window) {
+  top.location = window.location;
+}
   </script>
  </body>
 </html>

@@ -1,72 +1,3 @@
-  // 曼波 曼波
-  // 哦吗吉利曼波
-
-  // 禁用右键菜单
-  document.addEventListener('contextmenu', function(e) {
-	e.preventDefault();
-	return false;
-	alert("曼波")
-  });
-
-  // 禁用 F12、Ctrl+Shift+I、Ctrl+Shift+J、Ctrl+U 等常用调试快捷键
-  document.addEventListener('keydown', function(e) {
-	// 禁止 F12
-	if (e.key === 'F12') {
-	  e.preventDefault();
-	  window.location.href = "https://www.baidu.com/?";
-	}
-	
-	if (e.ctrlKey && e.shiftKey && ['I', 'J', 'C', 'U'].includes(e.key)) {
-	  e.preventDefault();
-	  window.location.href = "https://www.baidu.com/?";
-	}
-
-	// 可选：禁用 Ctrl+Shift+R（强制刷新）
-	if (e.ctrlKey && e.shiftKey && e.key === 'R') {
-	  e.preventDefault();
-	  window.location.href = "https://www.baidu.com/?";
-	}
-  });
-
-  // 防止通过菜单或设置打开开发者工具（检测控制台是否打开）
-  let devtools = false;
-  const threshold = 160; // 宽度阈值，用于检测开发者工具是否打开
-
-  const checkDevTools = () => {
-	if (window.outerHeight - window.innerHeight > threshold || 
-		window.outerWidth - window.innerWidth > threshold) {
-	  devtools = true;
-	  // 可选：发现开发者工具打开后执行一些操作
-	  document.body.innerHTML = '<h1>禁止调试！页面已锁定。</h1>';
-	  let vConsole = new window.VConsole();
-	  vConsole.destroy();
-	  localStorage.setItem('hello', '1');
-	  window.location.href = "https://www.baidu.com/?";
-	}
-  };
-
-  // 定时检测窗口尺寸差异（开发者工具打开通常会导致 outer 和 inner 尺寸差变大）
-let devToolsDetected = false;
-
-function checkDevTools() {
-	const isDevToolsOpen = (window.outerHeight - window.innerHeight > 100) || 
-						   (window.outerWidth - window.innerWidth > 100);
-
-	if (isDevToolsOpen && !devToolsDetected) {
-		alert('检测到开发者工具已打开！');
-		devToolsDetected = true; // 只提示一次
-	} else if (!isDevToolsOpen) {
-		devToolsDetected = false; // 如果关闭了，可以再次检测
-	}
-}
-
-setInterval(checkDevTools, 100);
-
-  // 可选：防止页面被 iframe 嵌套（防拖拽调试）
-  if (top !== window) {
-	top.location = window.location;
-  }
-
 	// 映射表
 	// 你咋进来的谁让你看源代码的了
 	// 算了你想看就看吧
@@ -97,7 +28,7 @@ setInterval(checkDevTools, 100);
 	  jumpContainer.style.display = "none";
 
 	  if (!input) {
-		resultEl.innerText = "⚠️ 请输入兑换码";
+		resultEl.innerText = "⚠️ 你没有输入任何兑换码";
 		resultEl.style.color = "orange";
 		return;
 	  }
@@ -107,12 +38,12 @@ setInterval(checkDevTools, 100);
 
 	  // 检查是否在映射表中
 	  if (hash in hashToUrlMap) {
-		resultEl.innerText = "✅ 验证成功！点击按钮跳转";
+		resultEl.innerText = "✅ 输对了！看到这个按钮了吗，点击它";
 		resultEl.style.color = "green";
 		jumpButton.href = hashToUrlMap[hash];
 		jumpContainer.style.display = "block"; // 显示跳转按钮
 	  } else {
-		resultEl.innerText = "❌ 兑换码无效，请重试";
+		resultEl.innerText = "❌ 不对";
 		resultEl.style.color = "red";
 	  }
 	}
@@ -123,32 +54,3 @@ setInterval(checkDevTools, 100);
 		verifyCode();
 	  }
 	});
-
-//呵呵
-//呵呵
-//呵呵
-//呵呵
-//呵呵
-//呵呵
-//呵呵
-//呵呵
-//呵呵
-//呵呵
-//呵呵
-//呵呵
-//呵呵
-//呵呵
-//呵呵
-//呵呵
-//呵呵
-//呵呵
-//呵呵
-//呵呵
-//呵呵
-//呵呵
-//呵呵
-//呵呵
-//呵呵
-//呵呵
-//呵呵
-//呵呵
