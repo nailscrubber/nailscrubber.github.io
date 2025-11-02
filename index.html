@@ -27,6 +27,52 @@
 <link rel="stylesheet" href="./style.css">
  </head>
  <body>
+  <!-- 用户协议弹窗 -->
+  <div class="agreement-overlay" id="agreementModal">
+   <div class="agreement-modal">
+	<div class="agreement-header">使用说明</div>
+	<div class="agreement-body">
+	 <!-- 协议文本 -->
+	 <p>欢迎来到齐喜的网站！请先阅读我们的使用说明、用户协议与条款后使用本网站。</p>
+	 <p>我们使用html标签来表明重点内容，以提醒您关注。如果您在阅读时发现了形如&lt;strong&gt;的内容，请将这些字母符号忽略。</p>
+	 <br>
+	 <h2>使用说明与用户协议</h2>
+	 <h4>仅对于本网站有效。</h4>
+	 <br>
+	 <p>这是一个静态网站。我们的网址:<a href="https://nailscrubber.github.io/">https://nailscrubber.github.io</a>。由Github Pages托管。与Github相关的条约等与本网站无关。</p>
+	 <p><strong>主页</strong>展示一些公告，不定期更新</p>
+	 <p><a href="product.html"><strong>产品中心</strong></a>展示我们的虚拟产品。</p>
+	 <p>产品中心为部分虚拟产品提供<strong>图片、体验链接、下载链接</strong>和<strong>视频链接</strong>。图片由腾讯微云外链托管，显示异常可尝试关闭广告过滤（Ad blocker）<p>
+	 <p>体验链接可以体验虚拟产品一分钟（这不是齐喜手动设置的）。如需长时间体验请选择<strong>下载</strong>或者<strong>使用微信小程序</strong>。</p>
+	 <p>使用小程序时可能需要先<strong>登录</strong>。相关协议与本网站无关。您在本网站外（包括其它网站、小程序等）的一切行为与本网站无关。</p>
+	 <p>选择下载会跳转到123网盘。您下载.nbc文件后需手动在<a href="https://hx.nobook.com/" target="_blank" rel="noopener noreferrer">网页版NOBOOK化学虚拟实验</a>中导入。</p>
+	 <p>兑换码功能不断研发中。我们使用SHA-256来验证兑换码是否正确。<strong>这不具有商业、赌博等性质</strong>，或者说<strong>仅供娱乐</strong>。</p>
+	 <p>电子化学的网站由PTC托管，相关事宜询问<a href="https://b23.tv/NISgqNX" target="_blank" rel="noopener noreferrer">PTC。</a></p>
+	 <p>如果您无法访问此网站，且错误代码（在基于Chromium的浏览器中)为<strong>CONNECTION_RESET</strong>，这是正常现象，因为Github服务器在国外。请不要为了访问网站而刻意使用非法工具，因您自行使用不合法工具造成的法律后果，由您自行承担。</p>
+	 <p>请不要模仿虚拟产品的行为，这很可能造成人身危险！</p>
+	 <p><br></p>
+	 <p><strong>您承诺您已知晓本站的娱乐性性质。</strong></p>
+	 <p><strong<您承诺您不会模仿虚拟产品的行为。</strong></p>
+	 <p><strong>您承诺您已知晓其它外部界面与本站无关。</strong></p>
+	 <p><strong>您承诺您在履行条约的同时遵守中华人民共和国的法律。</strong></p>
+	 <p><strong>您需承诺以上条约，否则不能使用我们的网站。</strong></p>
+	 <p>点击"我同意"自动视为您已承诺。</p>
+	 <br>
+	 <h2>隐私条款</h2>
+	 <p>我们不会收集你的任何个人数据，包括隐私。</p>
+	 <p>我们使用本地缓存来确保此窗口只会弹出一次以免影响体验。此过程不会收集任何信息。</p>
+	 <p>第三方跳转到的网站，如另有条款请遵循。此协议仅适用于此网站。</p>
+	 <p>在此，感谢您的耐心！</p>
+	 <br>
+	 <p><strong>如本协议有改动，会再次弹出本窗口，您也需要再次阅读并选择是否使用。</strong></p>
+	 <br>
+	</div>
+	<div class="agreement-footer">
+	 <button class="agreement-btn btn-agree" onclick="acceptAgreement()">我同意</button>
+	 <button class="agreement-btn btn-decline" onclick="declineAgreement()">我拒绝</button>
+	</div>
+   </div>
+  </div>
   <!-- 页面头部 -->
   <header style="position: relative;">
    <h1>齐喜的网站</h1>
@@ -43,9 +89,11 @@
 	<li><a href="product.html"><strong>产品中心</strong></a></li>
 	<li><a href="code.html"><strong>兑换码</strong></a></li>
 	<li><a href="hengdian.html"><strong>恒电虚拟公司</strong></a></li>
+	<li><a href="code.html"><strong>兑换码</strong></a></li>
 	<li><a href="about.html"><strong>关于我</strong></a></li>
-	<li><a href="https://www.123865.com/s/sHDBvd-qAlKd"><strong>下载软件</strong></a></li>
+	<li><a href="https://www.123865.com/s/uxYEvd-eWWsH"><strong>下载软件</strong></a></li>
   </ul>
+  <sel
 </div>
   </header>
   <!-- 主体内容 -->
@@ -90,52 +138,10 @@
    <p><a href="https://space.bilibili.com/345281727">@齐喜的频道</a> 2024-2025 保留所有权利。</p>
    <p><small>*.nobook.com 为 北京乐步教育科技有限公司 的网址。</small></p>
    <p><small>123网盘提供下载支持</small></p>
-   <p><small> 版本 v.0.2.10 </small></p>
+   <p><small> 版本 v.0.2.13 </small></p>
   </footer>
-  <!-- 用户协议弹窗 -->
-  <div class="agreement-overlay" id="agreementModal">
-   <div class="agreement-modal">
-	<div class="agreement-header">用户协议与隐私条款</div>
-	<div class="agreement-body">
-	 <!-- 协议文本 -->
-	 <p>欢迎来到齐喜的网站！请先阅读我们的用户协议与条款后使用本网站。</p>
-	 <br>
-	 <h2>用户协议与条款</h2>
-	 <h4>以下简称“条款”</h4>
-	 <br>
-	 <p>首先，本网站由<a href="https://space.bilibili.com/345281727" target="_blank" rel="noopener noreferrer">齐喜的频道</a>（以下简称"齐喜"或"我"）个人编写，网址为<a href="#">https://nailscrubber.github.io/</a>。<strong>本网站仅供视频及创意分享，不具有商业用途。所有产品都是虚拟的，请不要当真。</strong></p>
-	 <p>图片链接由腾讯微云平台转存，仅供展示用。</p>
-	 <p>齐喜对视频及创意保留所有权利。由<a href="https://www.123pan.com" target="_blank" rel="noopener noreferrer">123网盘</a>提供文件保存及下载，该公司与齐喜无关。</p>
-	 <p>*.nobook.com是北京乐步教育科技有限公司的网址。使用请遵守NOBOOK相关条约。</p>
-	 <p>第二，本网站正在持续优化中。由于github服务器在国外，所以访问可能会出现问题，可多尝试几次。</p>
-	 <p>目前的这些虚拟产品供大家体验，可以点击下方的体验按钮或者下载按钮。体验版可以体验一分钟，而下载版需要搭配网页端NOBOOK虚拟实验使用，将会下载.nbc格式的文件。登录网页端后在个人实验tab中选择导入即可。</p>
-	 <p><strong>体验版只能一分钟是平台限制，不是齐喜手动调整的！</strong>所以手机端的用户可以下载微信app，利用跳转到小程序“NB作业助手”来不限时体验。</p>
-	 <p>下载的nbc文件仅供创意分享使用，请勿用于倒卖等商业用途。</p>
-	 <p>第三，虚拟产品与真实的化学操作无关，<strong>现实中请不要模仿</strong>。也请按照书中标准的操作规范进行学习。<strong>因现实中盲目模仿而造成的后果，齐喜不承担任何责任。</strong></p>
-	 <p>第四，这是个静态网站，没有后端。更新看运气。我们不会收集您的任何信息因为想收集也不知道怎么收集。齐喜一点html、css、js功底没有，请不要用开发者工具（如vConsole)看源代码。</p>
-	 <br>
-	 <p>底部推荐的网站为他人制作，与齐喜无关。</p>
-	 <p><em><small><strong>3L市值又跌了😭买点产品吧…</strong></small></em></p>
-	 <p>兑换码功能仅供娱乐，由SHA256验证，无赌博性质。</p>
-	 <p>我们将会在齐喜的网站内投放广告。广告不具有商业性质，由个人投稿，仅供娱乐与虚拟产品宣传。恳求观看广告来支持我们！</p>
-	 <p><br></p>
-	 <p>您承诺已充分阅读并理解以上条约，否则不能使用我们的网站。</p>
-	 <p>点击"确认"自动视为您已承诺。</p>
-	 <br>
-	 <h2>隐私条款</h2>
-	 <p>我们不会收集你的任何个人数据，包括隐私。</p>
-	 <p>我们使用本地缓存来确保此窗口只会弹出一次以免影响体验。此过程不会收集任何信息。</p>
-	 <p>第三方跳转到的网站，如另有条款请遵循。此协议及用户条款仅适用于此网站。</p>
-	 <br>
-	</div>
-	<div class="agreement-footer">
-	 <button class="agreement-btn btn-agree" onclick="acceptAgreement()">我同意</button>
-	 <button class="agreement-btn btn-decline" onclick="declineAgreement()">我拒绝</button>
-	</div>
-   </div>
-  </div>
-
   <script>
+// 检测是否同意了协议
 	function acceptAgreement() {
 	  // 同意协议：隐藏弹窗
 	  document.getElementById('agreementModal').style.display = 'none';

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="maximum-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>超乱码飘字</title>
+  <style>
+	body {
+	  margin: 0;
+	  height: 100vh;
+	  display: flex;
+	  justify-content: center;
+	  align-items: center;
+	  background: #000;
+	  overflow: hidden;
+	  font-family: 'Segoe UI', sans-serif;
+	  color: white;
+	}
+
+	#spawnBtn {
+	  padding: 14px 28px;
+	  font-size: 20px;
+	  cursor: pointer;
+	  background: #ff4d94;
+	  color: white;
+	  border: none;
+	  border-radius: 50px;
+	  transition: all 0.2s;
+	  box-shadow: 0 4px 12px rgba(255, 77, 148, 0.4);
+	}
+
+	#spawnBtn:hover {
+	  background: #ff1a8c;
+	  transform: scale(1.05);
+	}
+
+	.random-text {
+	  position: absolute;
+	  font-size: 18px;
+	  pointer-events: none;
+	  opacity: 1;
+	  animation: chaosFloat 4s cubic-bezier(0.2, 0.8, 0.4, 1) forwards;
+	  text-shadow: 0 0 8px rgba(255,255,255,0.7);
+	  z-index: 1000;
+	}
+
+	@keyframes chaosFloat {
+	  0% {
+		transform: translate(0, 0) rotate(0deg) scale(1);
+		opacity: 1;
+	  }
+	  100% {
+		transform: 
+		  translate(
+			calc((var(--dx, 0) * 100px)),
+			calc(-150px + (var(--dy, 0) * 50px))
+		  )
+		  rotate(var(--rotate, 0deg))
+		  scale(1.3);
+		opacity: 0;
+	  }
+	}
+  </style>
+</head>
+<body>
+  <button id="spawnBtn">💥 点我制造混沌！</button>
+
+  <script>
+	// 超大字符池：覆盖多个 Unicode 区块
+	const unicodeBlocks = [
+	  // 基本多文种平面（BMP）常用区块
+	  [0x0020, 0x007E],   // 基本拉丁（含符号）
+	  [0x00A1, 0x00FF],   // 拉丁补充-1（带重音字母等）
+	  [0x0370, 0x03FF],   // 希腊文与科普特文
+	  [0x0400, 0x04FF],   // 西里尔文（俄语等）
+	  [0x0530, 0x058F],   // 亚美尼亚文
+	  [0x0590, 0x05FF],   // 希伯来文
+	  [0x0600, 0x06FF],   // 阿拉伯文
+	  [0x0900, 0x097F],   // 天城文（印地语）
+	  [0x3040, 0x309F],   // 日文平假名
+	  [0x30A0, 0x30FF],   // 日文片假名
+	  [0xAC00, 0xD7AF],   // 韩文谚文（超大区块！）
+	  [0x4E00, 0x9FFF],   // CJK 统一汉字（含简体/繁体）
+	  [0x3400, 0x4DBF],   // CJK 扩展 A（更多汉字）
+	  [0xF900, 0xFAFF],   // CJK 兼容汉字（含繁体异体）
+	  [0x2000, 0x206F],   // 通用标点
+	  [0x2190, 0x21FF],   // 箭头
+	  [0x2200, 0x22FF],   // 数学运算符
+	  [0x25A0, 0x25FF],   // 几何图形
+	  [0x2600, 0x26FF],   // 杂项符号（天气、星象等）
+	  [0x2700, 0x27BF],   // 装饰符号（剪刀、笔等）
+	  [0x1F600, 0x1F64F], // Emoji：表情
+	  [0x1F300, 0x1F5FF], // Emoji：物体、自然
+	  [0x1F000, 0x1F02F], // 麻将牌
+	  [0x1F0A0, 0x1F0FF], // 扑克牌
+	  [0x1F3B0, 0x1F3FF], // 骰子、音乐符号等
+	];
+
+	function getRandomUnicodeChar() {
+	  const block = unicodeBlocks[Math.floor(Math.random() * unicodeBlocks.length)];
+	  const code = Math.floor(Math.random() * (block[1] - block[0] + 1)) + block[0];
+	  return String.fromCodePoint(code);
+	}
+
+	function generateChaoticString(length) {
+	  let str = '';
+	  for (let i = 0; i < length; i++) {
+		str += getRandomUnicodeChar();
+	  }
+	  return str;
+	}
+
+	document.getElementById('spawnBtn').addEventListener('click', () => {
+	  const len = Math.floor(Math.random() * 12) + 3; // 3~14 字符
+	  const text = generateChaoticString(len);
+
+	  const span = document.createElement('span');
+	  span.className = 'random-text';
+	  span.textContent = text;
+
+	  // 随机位置
+	  const x = Math.random() * (window.innerWidth - 150);
+	  const y = Math.random() * (window.innerHeight - 250) + 150;
+
+	  span.style.left = x + 'px';
+	  span.style.top = y + 'px';
+
+	  // 随机动画参数
+	  span.style.setProperty('--dx', (Math.random() - 0.5) * 4);
+	  span.style.setProperty('--dy', Math.random() * 2);
+	  span.style.setProperty('--rotate', (Math.random() - 0.5) * 360 + 'deg');
+
+	  // 随机颜色（亮色系，适配黑底）
+	  const hue = Math.floor(Math.random() * 360);
+	  span.style.color = `hsl(${hue}, 80%, 85%)`;
+
+	  document.body.appendChild(span);
+
+	  // 5秒后移除
+	  setTimeout(() => {
+		if (span.parentNode) span.remove();
+	  }, 5000);
+	});
+  </script>
+</body>
+</html>
