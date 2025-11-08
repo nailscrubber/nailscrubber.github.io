@@ -13,7 +13,9 @@
 	  "df3041cf9a7e98ba49a1c89d94fb39d6215f1559e088de5cc90dab2bb4ac6592": "https://pipetrainingcamp.github.io/index.html", //GoodPTC的网站！
 	  "ffcdce84bb3a3b58b07fb0a4aaa9cea1f302661649657890281660bbbb806fc1": "https://s.nobook.com/index.html?id=208948", //泡泡机！
  	 "b9ad6c15a1bd99811f076500cc45a217c5b44c21282929c67587746ed9377568": "boom.html", //Utw！
- 	 "cff97e03e7e93cd2a84a27ce90f1c9397507f017db5025a711994efafa59aaea": "https://s.nobook.com/index.html?id=213187"  //变色花！
+ 	 "cff97e03e7e93cd2a84a27ce90f1c9397507f017db5025a711994efafa59aaea": "https://s.nobook.com/index.html?id=213187", //变色花！
+	  "2743b6a2d94064b1b6131c3f07d27d8e36144d3ed5dcaf642d6917229fbbe1cf": "https://s.nobook.com/index.html?id=234906", //高压放电装置！
+	  "e5e72beb4e3c6926d3dc9e3e2ef7833ba50cd919c2460a782b244fd071e920de": "weather.html"  //天气瞎报
 	  // 可继续添加更多 "hash": "url"
 	};
 
@@ -54,3 +56,103 @@
 		verifyCode();
 	  }
 	});
+
+(function() {
+  // "I'm on top of the world because of you."
+  // "All I wanted to do is follow you."
+  const advicePools = {
+	extremeCold: [
+	  "洗钉机冻成冰雕，建议改日再战",
+	  "试管已结冰，齐喜说别硬掰",
+	  "氢气球变冰球，今日不宜实验",
+	  "哪个小可爱放的氢氧化钡溶液和氯化铵溶液"
+	],
+	cold: [
+	  "昼夜温差大，试管易裂，轻拿轻放",
+	  "手会抖，建议戴手套洗钉",
+	  "Lemon泡了果糖茶，放在暖气片上"
+	],
+	cool: [
+	  "适合做低温实验，手别插口袋",
+	  "双氧水分解慢，耐心点",
+	  "Vial正在测试Gcn Pro低温能不能运转",
+	  "四氧化二氮平衡开始受影响…"
+	],
+	comfortable: [
+	  "室温舒适，Utw正在打Phigros",
+	  "室温舒适，Vial正在研究Gcn Pro Max",
+	  "室温舒适，CWMM在磨铜钉",
+	  "室温和平，GoodPTC的玻璃管今天没炸",
+	  "温度舒适，这很NOBOOK"
+	],
+	warm: [
+	  "双氧水冒泡中，通风！",
+	  "镀膜液开始反光，小心自燃",
+	  "ECC提醒：氢气别晒太阳"
+	],
+	hot: [
+	  "高温警告：镀膜液可能自燃🔥",
+	  "实验室像蒸笼，建议暂停实验",
+	  "Utw服务器过热，Phigros卡顿中",
+	  "ECC的干式洗铜机释放了1239℃高温😱"
+	]
+  };
+// 就你小子暂停偷看是吧
+  function pickRandom(arr) {
+	return arr[Math.floor(Math.random() * arr.length)];
+  }
+
+  function getAdvice(maxTemp) {
+	if (maxTemp <= -10) return pickRandom(advicePools.extremeCold);
+	if (maxTemp <= 0) return pickRandom(advicePools.cold);
+	if (maxTemp <= 15) return pickRandom(advicePools.cool);
+	if (maxTemp <= 28) return pickRandom(advicePools.comfortable);
+	if (maxTemp <= 35) return pickRandom(advicePools.warm);
+	return pickRandom(advicePools.hot);
+  }
+
+  // === Lemon市===
+  fetch(`https://api.open-meteo.com/v1/forecast?latitude=46.643&longitude=124.849&daily=temperature_2m_max,temperature_2m_min&current=temperature_2m&temperature_unit=celsius&timezone=Asia/Shanghai`)
+	.then(res => res.json())
+	.then(data => {
+	  const current = Math.round(data.current.temperature_2m);
+	  const max = Math.round(data.daily.temperature_2m_max[0]);
+	  const min = Math.round(data.daily.temperature_2m_min[0]);
+	  const advice = getAdvice(max);
+	  document.getElementById('qixi-suihua-status').textContent = 
+		`Lemon市今日 ${min}~${max}℃（现 ${current}℃），${advice}`;
+	})
+	.catch(() => {
+	  document.getElementById('qixi-suihua-status').textContent = 
+		"Lemon市今日 ?~?℃（现 ?℃），信号被雪埋了❄️";
+	});
+
+  // === NB市===
+  fetch(`https://api.open-meteo.com/v1/forecast?latitude=39.9042&longitude=116.4074&daily=temperature_2m_max,temperature_2m_min&current=temperature_2m&temperature_unit=celsius&timezone=Asia/Shanghai`)
+	.then(res => res.json())
+	.then(data => {
+	  const current = Math.round(data.current.temperature_2m);
+	  const max = Math.round(data.daily.temperature_2m_max[0]);
+	  const min = Math.round(data.daily.temperature_2m_min[0]);
+	  const advice = getAdvice(max);
+	  document.getElementById('qixi-nb-status').textContent = 
+		`NB大陆今日平均气温 ${min}~${max}℃（现 ${current}℃），${advice}`;
+	})
+	.catch(() => {
+	  document.getElementById('qixi-nb-status').textContent = 
+		"NB市今日 ?~?℃（现 ?℃），气象站被Utw炸了💥";
+	});
+})();
+
+// 清空的函数
+function clearCode() {
+  const input = document.getElementById("codeInput");
+  const resultEl = document.getElementById("result");
+  const jumpContainer = document.getElementById("jumpContainer");
+
+  input.value = "";
+  resultEl.innerText = "";
+  resultEl.style.color = "";
+  jumpContainer.style.display = "none";
+  input.focus();
+}

@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="theme-color" content="#20C1FF">
+  <title>齐喜的网站--天气瞎报</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+	.city { margin: 10px 0; }
+	.temp { color: #e74c3c; font-weight: bold; }        /* 温度 - 红 */
+	.feel { color: #e67e22; }                            /* 体感 - 橙 */
+	.humid { color: #3498db; }                           /* 湿度 - 蓝 */
+	.wind { color: #2ecc71; }                            /* 风速 - 绿 */
+	.cloud { color: #95a5b6; }                           /* 云量 - 灰蓝 */
+	.uv { color: #f39c12; }                              /* UV - 橙黄 */
+	.sun { color: #f1c40f; }                             /* 日出日落 - 金 */
+.refresh {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  font-size: 24px;
+  cursor: pointer;
+  user-select: none;
+  z-index: 100;
+  opacity: 0.7;
+  transition: opacity 0.2s, transform 0.1s;
+}
+
+.refresh:hover {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+.refresh.error {
+  color: #ff6b6b;
+}
+
+.forecast-row {
+  margin-top: 8px;
+  font-size: 14px;
+  color: #555;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.forecast-day {
+  background: #f0f8ff;
+  border: 1px solid #cce4ff;
+  border-radius: 6px;
+  padding: 4px 6px;
+  white-space: nowrap;
+}
+  </style>
+ </head>
+ <!-- 页面头部 -->
+ <body>
+  <header style="position: relative;">
+   <h1>齐喜的网站</h1>
+   <h6>终于进来了，随便看看</h6>
+   <!-- 汉堡菜单按钮 + 下拉 -->
+   <div class="nav-menu-toggle">
+	<div class="hamburger" onclick="this.classList.toggle('active')">
+	 <span></span> <span></span> <span></span>
+	</div>
+	<ul class="nav-dropdown">
+	 <li><a href="index.html"><strong>首页</strong></a></li>
+	 <li><a href="product.html"><strong>产品中心</strong></a></li>
+	 <li><a href="https://nailscrubber.github.io/hengdian.html"><strong>恒电虚拟公司</strong></a></li>
+	 <li><a href="code.html"><strong>兑换码</strong></a></li>
+	 <li><a href="weather.html"> 刷新（天气瞎报）</a></li>
+	 <li><a href="#weather_main"><small>天气瞎报</small></a></li>
+	 <li><a href="#weather_form"><small>对照表</small></a></li>
+	 <li><a href="about.html"><strong>关于我</strong></a></li>
+	 <li><a href="https://www.123865.com/s/uxYEvd-eWWsH"><strong>下载软件</strong></a></li>
+	</ul>
+   </div>
+  </header>
+  <main class="container">
+   <h2 id="weather_main">😆天气瞎报</h2>
+<div class="city" id="lemon"><strong>Lemon市：</strong>加载中…</div>
+<div class="city" id="nb"><strong>NB总部：</strong>加载中…</div>
+<div class="city" id="ptc"><strong>PTC市：</strong>加载中…</div>
+<div class="city" id="hengdian"><strong>恒电区：</strong>加载中…</div>
+<div class="city"><strong>Utw市</strong><br>❌ 数据获取失败，无法访问坐标。</div>
+   <p><br></p>
+   <h2 id="weather_form">对照表</h2>
+   <p>我们使用emoji来表示天气状况。如您的设备不支持，请忽略。</p>
+   <p><strong>
+   🌞 = 晴<br>
+   🌤 = 少云<br>
+   🌥 = 多云<br>
+   ☁ = 阴天<br>
+   🌫 = 雾<br>
+   💧 = 毛毛雨 / 小雨<br>
+   💦 = 大毛毛雨<br>
+   🌧 = 中雨 / 中阵雨<br>
+   🌧🌧 = 大雨 / 大阵雨<br>
+   🧊 = 冻雨<br>
+   🌨 = 小雪<br>
+   ❄ = 雪 / 中雪<br>
+   ❄❄ = 大雪<br>
+   🌦 = 阵雨<br>
+   🌩 = 雷雨/ 雷暴<br>
+   ⛈️ = 雷暴<br>
+   ❓ = 【不支持的天气】<br>
+   NaN = 【不支持的数据】
+   </strong><br>
+   我们暂不支持🌪🌬🌀🌈🔥🌊等。
+   </p>
+  </main>
+  <script>
+const advicePools = {
+  cold: [],
+  hot: [],
+  rain: []
+};
+function pick(arr) { return arr[Math.floor(Math.random() * arr.length)] || ""; }
+
+function weatherCodeToEmoji(code) {
+  // 晴 & 云
+  if (code === 0) return "🌞";       // 晴
+  if (code === 1) return "🌤️";       // 少云
+  if (code === 2) return "⛅";        // 云
+  if (code === 3) return "☁️";        // 阴天
+
+  // 雾 & 沙尘
+  if (code >= 45 && code <= 48) return "🌫️"; // 雾
+
+  // 降水（按强度区分）
+  if (code >= 51 && code <= 53) return "💧"; // 小毛毛雨
+  if (code >= 55 && code <= 57) return "💦"; // 中到大毛毛雨
+
+  if (code === 61) return "💧";      // 小雨
+  if (code === 63) return "🌧️";      // 中雨
+  if (code === 65) return "🌧🌧";      // 大雨
+  if (code >= 66 && code <= 67) return "🧊"; // 冻雨（用冰晶表示）
+
+  // 雪
+  if (code === 71) return "🌨️";      // 小雪
+  if (code === 73) return "❄️";      // 中雪
+  if (code >= 75 && code <= 77) return "❄❄"; // 大雪
+
+  // 阵性降水
+  if (code === 80) return "🌦️";      // 小阵雨
+  if (code === 81) return "🌧️";      // 中阵雨
+  if (code === 82) return "🌧🌧";      // 强阵雨
+
+  // 雷暴
+  if (code === 95) return "🌩";      // 雷暴（轻）
+  if (code === 96) return "⛈️";      // 雷暴
+
+  else return "❓"; // 究极天气
+
+  // 默认
+  return "🌛"; //夜空
+}
+
+function formatTime(unix) {
+  const d = new Date(unix * 1000);
+  return d.getHours().toString().padStart(2, '0') + ':' + d.getMinutes().toString().padStart(2, '0');
+}
+
+const cities = [
+  ["Lemon市", 46.643, 124.849, "lemon"],
+  ["NB总部", 39.9042, 116.4074, "nb"],
+  ["PTC市", 28.0000, 120.6994, "ptc"],
+  ["恒电区", 27.7333, 111.6500, "hengdian"],
+];
+
+/************* 5 日天气小横条样式 *************/
+const forecastCSS = document.createElement('style');
+forecastCSS.textContent = `
+  .forecast-row { margin-top:8px;font-size:13px;color:#555; }
+  .forecast-day { display:inline-block;margin:2px 4px 2px 0;padding:3px 6px;background:#f0f8ff;border:1px solid #cce4ff;border-radius:5px;white-space:nowrap; }
+`;
+document.head.appendChild(forecastCSS);
+/********************************************/
+
+cities.forEach(([name, lat, lon, id]) => {
+  /* ---- 先拿今天详情 ---- */
+  const todayUrl = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,relative_humidity_2m,apparent_temperature,is_day,precipitation,rain,showers,snowfall,weather_code,cloud_cover,wind_speed_10m,wind_direction_10m,uv_index,visibility&hourly=relative_humidity_2m,apparent_temperature&daily=sunrise,sunset,uv_index_max&timezone=Asia/Shanghai&forecast_days=1`;
+
+  fetch(todayUrl)
+	.then(r => r.json())
+	.then(data => {
+	  const cur = data.current;
+	  const hourly = data.hourly;
+	  const daily = data.daily;
+	  const h = new Date().getHours();
+
+	  const temp = cur.temperature_2m?.toFixed(1) ?? '?';
+	  const feels = (hourly.apparent_temperature?.[h] ?? cur.apparent_temperature)?.toFixed(1) ?? temp;
+	  const hum = (hourly.relative_humidity_2m?.[h] ?? cur.relative_humidity_2m)?.toFixed(0) ?? '?';
+	  const wind = cur.wind_speed_10m?.toFixed(1) ?? '?';
+	  const windDir = cur.wind_direction_10m ? Math.round(cur.wind_direction_10m) + '°' : '?';
+	  const cloud = cur.cloud_cover?.toFixed(0) ?? '?';
+	  const uv = cur.uv_index?.toFixed(1) ?? '?';
+	  const sunrise = formatTime(daily.sunrise[0]);
+	  const sunset = formatTime(daily.sunset[0]);
+	  const emoji = weatherCodeToEmoji(cur.weather_code);
+
+	  let extra = '';
+	  const tNum = parseFloat(temp);
+	  const hasRain = (parseFloat(cur.rain || 0) > 0.1) || (parseFloat(cur.showers || 0) > 0.1);
+	  if (!isNaN(tNum)) {
+		if (tNum < 0) extra = pick(advicePools.cold);
+		else if (tNum > 32) extra = pick(advicePools.hot);
+		else if (hasRain) extra = pick(advicePools.rain);
+	  }
+
+	  document.getElementById(id).innerHTML = `
+		<strong>${name}</strong> ${emoji} <br>
+		<span class="temp">${temp}℃</span>（体感<span class="feel">${feels}℃</span>）<br>
+		| 湿度<span class="humid">${hum}%</span><br>
+		| 风速<span class="wind">${wind}m/s</span>（风向大约${windDir}）<br>
+		| 云量<span class="cloud">${cloud}%</span><br>
+		| UV<span class="uv">${uv}</span><br>
+		| 日出<span class="sun">${sunrise}</span> 日落<span class="sun">${sunset}</span><br><strong>5日天气瞎报：</strong><br>
+		${extra ? `<span class="extra">${extra}</span>` : ''}
+	  `.replace(/\s+/g, ' ').trim();
+
+	  /* ---- 再拿 5 日预报 ---- */
+	  return fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&daily=temperature_2m_max,temperature_2m_min,weather_code&timezone=Asia/Shanghai&forecast_days=5`);
+	})
+	.then(r => r.json())
+	.then(data => {
+	  const max = data.daily.temperature_2m_max;
+	  const min = data.daily.temperature_2m_min;
+	  const codes = data.daily.weather_code;
+	  let row = '<div class="forecast-row">';
+	  for (let i = 0; i < 5; i++) {
+		row += `<span class="forecast-day">${weatherCodeToEmoji(codes[i])} ${max[i].toFixed(0)}°/${min[i].toFixed(0)}°</span>`;
+	  }
+	  row += '</div>';
+	  document.getElementById(id).insertAdjacentHTML('afterend', row);
+	})
+	.catch(() => {
+	  document.getElementById(id).innerHTML = `<strong>${name}</strong> ❌ 数据获取失败（信号塔被Utw炸了）`;
+	});
+});
+</script>
+
+  <!-- 页脚 -->
+  <footer>
+   <p><a href="https://space.bilibili.com/345281727">@齐喜的频道</a> 2024-2025 保留所有权利。</p>
+   <p><small>天气数据来源于 <a href="https://open-meteo.com/" target="_blank" rel="noopener noreferrer">Open-Meteo</a>，仅供娱乐。</small></p>
+   <p><small> 版本 v.0.2.15 </small></p>
+  </footer>
+ </body>
+</html>
