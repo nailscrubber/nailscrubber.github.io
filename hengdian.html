@@ -56,22 +56,6 @@
    <h6>点击东北雨姐关闭带π全损大东北音乐</h6>
    <img id="toggleBtn" src="hengdianass/yujie.png" width="100" height="100" />
    <audio id="myAudio" muted autoplay src="hengdianass/bigdongbeiismyhome.mp3"></audio>
-   <script>
-        const audio = document.getElementById('myAudio');
-        const toggleBtn = document.getElementById('toggleBtn');
-
-        // 2. 取消静音，实现真正的默认播放（解决浏览器自动播放限制）
-        audio.muted = false;
-
-        // 3. 按钮点击事件：切换停止/继续
-        toggleBtn.addEventListener('click', () => {
-        if (audio.paused) { // 如果音频已暂停
-            audio.play();     // 继续播放
-        } else {            // 如果音频正在播放
-            audio.pause();    // 暂停播放（保留进度，不重置）
-        }
-        });
-   </script>
   </header>
   <!-- 主体内容 -->
   <main class="container">
@@ -113,6 +97,14 @@
 	      <h3>强力清洗剂</h3>
 	      <p>新研发的强力清洁剂。</p>
 	      <a href="https://www.bilibili.com/video/BV1KZSvBNEid/?vd_source=0a1241993eca2c50e6b2f0046bb019a2" target="_blank" rel="noopener noreferrer">点击观看视频</a>
+	    </div>
+	</div>
+	<div class="product">
+	    <img src="./hengdianass/qldjzz.jpg" alt="强力电机转子">
+	    <div class="product-info">
+	      <h3>强力电机转子</h3>
+	      <p>多饶了几圈的转子，可能会爆炸。</p>
+	      <a href="https://www.bilibili.com/video/BV1MRSvBTEho/?spm_id_from=333.1387.homepage.video_card.click&vd_source=0a1241993eca2c50e6b2f0046bb019a2" target="_blank" rel="noopener noreferrer">点击观看视频</a>
 	    </div>
 	</div>
 	<div class="product">
@@ -190,6 +182,20 @@
             } else {
                 popupImage.classList.remove('show');
             }
+        });
+		const audio = document.getElementById('myAudio');
+        const toggleBtn = document.getElementById('toggleBtn');
+
+        // 2. 取消静音，实现真正的默认播放（解决浏览器自动播放限制）
+        audio.muted = false;
+
+        // 3. 按钮点击事件：切换停止/继续
+        toggleBtn.addEventListener('click', () => {
+        if (audio.paused) { // 如果音频已暂停
+            audio.play();     // 继续播放
+        } else {            // 如果音频正在播放
+            audio.pause();    // 暂停播放（保留进度，不重置）
+        }
         });
   </script>
  </body>
